@@ -1,0 +1,7 @@
+/* ./assets/css/tailwind.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@include font-face( Montserrat, '~/assets/fonts/Montserrat/Montserrat-Regular.ttf');
+@include font-face( Poppins, '~/assets/fonts/Poppins/Poppins-Regular.ttf');
