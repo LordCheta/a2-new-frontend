@@ -1,5 +1,5 @@
 <template>
-  <aside class="w-64 h-screen p-3 m-4 bg-white rounded">
+  <aside class="w-64 h-h-auto p-3 m-4 bg-white rounded">
     <nav>
       <ul class="flex flex-col">
         <li class="mt-4">

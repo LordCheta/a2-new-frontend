@@ -6,12 +6,13 @@
       <CategoriesSideMenu/>
 
       <section class="flex flex-row">
-        <Carousel />
+        <Carousel/>
 
         <section class="flex flex-col">
-        </section >
-      </section >
-    </main  >
+        </section>
+      </section>
+    </main >
+    <Footer/>
   </div >
 </template>
 
