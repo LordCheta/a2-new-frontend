@@ -6,7 +6,7 @@
       <CategoriesSideMenu/>
 
       <section class="flex flex-row">
-        <Carousel/>
+        <!-- <Carousel/> -->
 
         <section class="flex flex-col">
         </section>
