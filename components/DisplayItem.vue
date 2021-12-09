@@ -1,0 +1,48 @@
+<template>
+  <div class="w-60 h-80 rounded-lg overflow-hidden shadow-md bg-white">
+    <img class="w-full h-3/5 border-b" :src="iPicture" alt="picture of the product"/>
+
+    <div class="flex flex-row mt-2">
+      <NuxtLink to="/product-detail"
+        class="text-a2blue font-extralight text-2xl ml-4"
+        :productDetail="{
+          picture: iPicture,
+          name: iName,
+          rating: iRating,
+          id: iId,
+          price: iPrice,
+          description: iDescription
+        }" :image="iPicture" :iName="iName">
+          {{iName}}
+      </NuxtLink>
+      <div class="flex flex-row gap-1 ml-16 mt-1">
+        <solid-star-icon class="w-6  h-6 text-a2yellow"/>
+        <p class="text-a2blue text-sm">{{iRating}}</p>
+      </div>
+    </div>
+    <p class="text-a2blue font-meduim text-2xl ml-4">₦{{iPrice}}</p>
+
+    <button type="submit" class="p-1 border-2 text-xs ml-4 mt-3 text-a2blue rounded-lg font-light">Add &nbsp; +</button>
+  </div>
+</template>
+
+<script>
+  export default {
+  props: {
+    iPicture: {
+      type: String,
+      default: "https://images.unsplash.com/photo-1590012040529-c5e12f37b5d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
+    },
+    iName: String,
+    iRating: String,
+    iId: String,
+    iPrice: String,
+    iDescription: String
+  },
+  data () {
+      return {
+
+      }
+    }
+  }
+</script>

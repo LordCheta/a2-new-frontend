@@ -1,60 +1,89 @@
-<!-- <template>
-  <section>
-    <div class="carousel">
-    <div class="inner">
-      <div class="card" v-for="card in cards" :key="card">
-        {{ card }}
+<template>
+  <section class="flex flex-col p-4">
+    <div class="w-full flex justify-center overflow-hidden">
+      <div class="inner w-screen" ref="inner" :style="innerStyles">
+        <div class="inline-flex mr-3 justify-center items-center w-screen h-96 text-white bg-a2blue" v-for="card in cards" :key="card">
+          {{ card }}
+        </div>
       </div>
     </div>
-  </div>
-  <button>prev</button>
-  <button @click="next">next</button>
+
+    <div class="divide-x divide-a2blue text-a2yellow mt-1">
+      <button @click="prev" class="p-1">prev</button>
+      <button @click="next" class="p-1">next</button>
+    </div>
   </section>
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      cards: [1, 2, 3, 4, 5, 6, 7, 8],
+      cards: ["Advert Item 1", "Advert Item 2", "Advert Item 3", "Advert Item 4", "Advert Item 5", "Advert Item 6", "Advert Item 7", "Advert Item 8"],
       innerStyles: {},
-      step: ''
+      step: '',
+      transitioning: false
     }
   },
-    mounted() {
+  mounted () {
     this.setStep()
+    this.resetTranslate()
+  },
+  methods: {
+    setStep () {
+      const innerWidth = this.$refs.inner.scrollWidth
+      const totalCards = this.cards.length
+      this.step = `${innerWidth / totalCards}px`
     },
-    methods: {
-      setStep () {
-        const innerWidth = this.$refs.inner.scrollWidth;
-        const totalCards = this.cards.length
-        this.step = `${innerWidth / totalCards}px`
-      },
-
-      next() {
-        this.moveLeft()
-
-        this.afterTransition(() => {
+    next () {
+      if (this.transitioning) return
+      this.transitioning = true
+      this.moveLeft()
+      this.afterTransition(() => {
         const card = this.cards.shift()
         this.cards.push(card)
-      }),
-
-      afterTransition(callback) {
-        const listener = () => {
-          callback()
-          this.$refs.inner.removeEventListener('transitionend', listener)
-        }
-        this.$refs.inner.addEventListener('transitionend', listener)
-      }
-
+        this.resetTranslate()
+        this.transitioning = false
+      })
     },
-      moveLeft() {
-        this.innerStyles = {
-          transform: `translateX(-${this.step})`
-        }
+    prev () {
+      if (this.transitioning) return
+      this.transitioning = true
+      this.moveRight()
+      this.afterTransition(() => {
+        const card = this.cards.pop()
+        this.cards.unshift(card)
+        this.resetTranslate()
+        this.transitioning = false
+      })
+    },
+    moveLeft () {
+      this.innerStyles = {
+        transform: `translateX(-${this.step})
+                    translateX(-${this.step})`
+      }
+    },
+    moveRight () {
+      this.innerStyles = {
+        transform: `translateX(${this.step})
+                    translateX(-${this.step})`
+      }
+    },
+    afterTransition (callback) {
+      const listener = () => {
+        callback()
+        this.$refs.inner.removeEventListener('transitionend', listener)
+      }
+      this.$refs.inner.addEventListener('transitionend', listener)
+    },
+    resetTranslate () {
+      this.innerStyles = {
+        transition: 'none',
+        transform: `translateX(-${this.step})`
       }
     }
   }
+}
 </script>
 
 <style scoped>
@@ -63,8 +92,8 @@ export default {
   overflow: hidden;
 }
 .inner {
-  white-space: nowrap;
   transition: transform 0.2s;
+  white-space: nowrap;
 }
 .card {
   width: 40px;
@@ -78,9 +107,4 @@ export default {
   align-items: center;
   justify-content: center;
 }
-/* optional */
-button {
-  margin-right: 5px;
-  margin-top: 10px;
-}
-</style> -->
+</style>
