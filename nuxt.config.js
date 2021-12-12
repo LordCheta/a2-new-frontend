@@ -10,7 +10,7 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      // { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
@@ -37,7 +37,7 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     // nuxt-vite
-    'nuxt-vite',
+    // 'nuxt-vite',
     // https://github.com/whardier/nuxt-hero-icons
     // '@nuxt-hero-icons/outline/nuxt',
     '@nuxt-hero-icons/solid/nuxt',
@@ -45,6 +45,8 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxt/http',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -54,5 +56,29 @@ export default {
   // tailwind
   tailwindcss: {
     cssPath: '~/assets/tailwind.css'
+  },
+
+  //  axios
+  axios: {
+    baseURL: process.env.BASE_URL,
+    // proxy: true
+  },
+
+  http: {
+    // proxyHeaders: false
+    baseUrl: process.env.baseUrl
+  },
+
+  // vue dev tools confif
+  vue: {
+    config: {
+      productionTip: false,
+      devtools: true
+    }
+  },
+
+  // environment variables
+  publicRuntimeConfig: {
+    baseUrl: process.env.BASE_URL
   }
 }

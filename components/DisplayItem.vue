@@ -3,7 +3,7 @@
     <img class="w-full h-3/5 border-b" :src="iPicture" alt="picture of the product"/>
 
     <div class="flex flex-row mt-2">
-      <NuxtLink to="/product-detail"
+      <NuxtLink :to="`/products/${iId}`"
         class="text-a2blue font-extralight text-2xl ml-4"
         :productDetail="{
           picture: iPicture,
