@@ -15,7 +15,7 @@
       </div>
 
       <div v-else class="flex flex-wrap justify-start content-center mt-8 gap-5">
-        <DisplayItem v-for="product in products.slice(0, 10)"
+        <DisplayItem v-for="product in products.slice(0, 10)" :key="index"
         :iName="product.title"
         :iPicture="productPicture(product.image.url)"
         :iPrice="product.price"

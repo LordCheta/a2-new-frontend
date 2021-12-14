@@ -6,10 +6,10 @@ export const state = () => ({
 
 
 export const getters = {
-  getCustomerCart: (state) => () => {
+  customerCart: (state) => () => {
     return state.customer.cart
   },
-  getCartSize: (state) => () => {
+  cartSize: (state) => () => {
     if(state.customer.cart.length == 0) return 0
 
     let size = 0;

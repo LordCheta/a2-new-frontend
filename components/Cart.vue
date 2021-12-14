@@ -1,7 +1,7 @@
 <template>
   <NuxtLink to="/check-out" class="flex flex-row text-a2blue">
     <solid-shopping-cart-icon class="w-8 h-8"/>
-    <p class="text-a2yellow">{{getCartSize()}}</p>
+    <p class="text-a2yellow">{{cartSize()}}</p>
     <p class="ml-2 mt-1">Cart</p >
 
   </NuxtLink>
@@ -17,7 +17,7 @@
 import { mapGetters } from "vuex"
 export default {
   computed: {
-    ...mapGetters(['getCartSize']),
+    ...mapGetters(['cartSize']),
   }
 }
 </script>

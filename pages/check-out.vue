@@ -18,21 +18,38 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="p-2 text-xl text-a2blue font-normal border-gray-300">
-            <td class="p-4 border-b border-r">Juice Box</td>
-            <td class="p-4 border-b border-r">₦5000</td>
-            <td class="p-4 border-b border-r"><input type="number" class="bg-transparent" value="1" name="" max="50" min="50" id=""></td>
-            <td class="p-4 border-b border-r">₦5000</td>
+          <tr v-for="product in customerCart()" :key="index" class="p-2 text-xl text-a2blue font-normal border-gray-300">
+            <td class="p-4 border-b border-r">{{product.productName}}</td>
+            <td class="p-4 border-b border-r">₦{{product.productPrice}}</td>
+            <td class="p-4 border-b border-r">{{product.userRequestedQty}}</td>
+            <td class="p-4 border-b border-r">₦{{(product.userRequestedQty * product.productPrice).toFixed(2)}}</td>
           </tr>
         </tbody>
       </table>
 
       <div class="p-6">
         <p class="font-medium underline text-a2blue">CART TOTALS</p>
-        <p class="text-sm text-gray-400">Subtotal: ₦5000</p>
-        <p class="text-sm text-gray-400">Delivery: ₦1000</p>
-        <p class="text-sm text-gray-400">Total: ₦6000</p>
-        <button class="mt-4 bg-a2blue text-xs text-a2yellow p-2 " type="submit">PROCEED TO CHECKOUT</button>
+
+        <p class="text-sm text-gray-400">Subtotal: ₦{{calcCartSubtotal}}</p>
+        <hr>
+        <div class="flex flex-col">
+          <p class="text-sm text-gray-400 underline mt-2">Delivery</p>
+          <div class="flex flex-row gap-x-2 mt-2">
+            <input @change="calcCartTotal()" type="radio" :value="feeA" v-model="deliveryFee" id=""> <label>Lekki / Eti-Osa / Ikeja / Magodo / Berger / Iyapa / Agege / Ikotun: <em>₦1,500</em></label>
+          </div>
+
+          <div class="flex flex-row gap-x-2">
+            <input @change="calcCartTotal()" type="radio" :value="feeB" v-model="deliveryFee" id=""> <label>Lagos Mainland / Lagos Island: <em>₦1,000</em></label>
+          </div>
+
+          <div class="flex flex-row gap-x-2">
+            <input @change="calcCartTotal()" type="radio" :value="feeC" v-model="deliveryFee"> <label>Ikorodu / Epe / Badagry / Ojo / Festac / Apapa / Abule-Egba/Mowe / Alagbado: <em>₦2,000</em></label>
+          </div>
+
+        </div>
+        <hr>
+        <p class="text-md mt-3 text-gray-600 font-bold">Total: ₦{{total}}</p>
+        <button class="mt-4 bg-a2blue text-xs text-a2yellow p-2 " type="submit">PROCEED TO PAYMENT</button>
       </div>
 
     </main >
@@ -42,13 +59,32 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex"
   export default {
     data() {
       return {
-        image: "https://images.unsplash.com/photo-1590012040529-c5e12f37b5d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80",
-        productName: "Juice Box",
-        productPrice: "₦5000"
+        cartSubtotal: 0,
+        deliveryFee: 0,
+        total: 0,
+        feeA: 1500,
+        feeB: 1000,
+        feeC: 2000
       }
-    }
-    }
+    },
+    computed: {
+      ...mapGetters(['customerCart']),
+      calcCartSubtotal() {
+        let subtotal = 0
+        for (const product of this.customerCart()) {
+          subtotal = subtotal + +(product.userRequestedQty * product.productPrice).toFixed(2)
+        }
+        return this.cartSubtotal = subtotal.toFixed(2)
+      }
+    },
+    methods: {
+      calcCartTotal() {
+        return this.total = +this.cartSubtotal + +this.deliveryFee
+      }
+    },
+  }
 </script>
