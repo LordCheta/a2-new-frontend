@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     logout() {
-      
+      this.$router.push("/merchant/login")
     }
   },
 }

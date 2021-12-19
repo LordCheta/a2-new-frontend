@@ -38,10 +38,13 @@
         <input class="bg-transparent w-80 text-xs ml-4" type="password" v-model="retypePassword" id="" placeholder="Retype Password" required>
       </div>
 
-      <div :class="btnEnabled" class="flex flex-row justify-center p-2 border-0 rounded-full bg-a2blue mt-4">
-        <solid-badge-check-icon class="w-5 h-5 text-a2yellow"/>
-        <input @click="registerMerchant(e)" class="text-a2yellow bg-transparent text-xs ml-1" type="submit" name="" id="" value="REGISTER" required>
-      </div>
+      <button :class="btnEnabled" class="flex flex-row justify-center p-2 border-0 rounded-full bg-a2blue mt-4 disabled">
+        <svg v-if="registering" class="animate-spin h-5 w-5 mr-3 border-b-2 border-r-2 rounded-full border-a2yellow" viewBox="0 0 24 24">
+          <!-- ... -->
+        </svg>
+        <solid-badge-check-icon v-else class="w-5 h-5 text-a2yellow"/>
+        <span v-if="!registering" @click="registerMerchant(e)" class="text-a2yellow bg-transparent text-xs ml-1">REGISTER</span>
+      </button>
     </form>
 
     <div class="flex justify-around text-xs p-4 w-60">
@@ -64,7 +67,7 @@ export default {
       password: null,
       retypePassword: null,
       registering: false,
-      btnEnabled: "disabled:opacity-75"
+      btnEnabled: "disabled"
     }
   },
 
