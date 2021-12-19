@@ -47,6 +47,8 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxt/http',
+    '@nuxtjs/auth-next',
+    'nuxt-validate'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -80,5 +82,15 @@ export default {
   // environment variables
   publicRuntimeConfig: {
     baseUrl: process.env.BASE_URL
+  },
+
+  // vee-validate
+  nuxtValidate: {
+    lang: 'en',
+    nuxti18n: {
+      locale: {
+        // 'zh-CN': 'zh_CN'
+      }
+    }
   }
 }

@@ -10,37 +10,37 @@
 
       <div class="flex flex-row p-2 border-0 rounded-full bg-gray-100">
         <solid-office-building-icon class="w-5 h-5 text-a2yellow"/>
-        <input class="bg-transparent w-80 text-xs ml-4" type="text" name="" id="" placeholder="Enter Business Name e.g: Joe Collections">
+        <input class="bg-transparent w-80 text-xs ml-4" type="text" v-model="businessName" id="" placeholder="Enter Business Name e.g: Joe Collections" required>
       </div>
 
       <div class="flex flex-row p-2 border-0 rounded-full bg-gray-100">
         <solid-location-marker-icon class="w-5 h-5 text-a2yellow"/>
-        <input class="bg-transparent w-80 text-xs ml-4" type="text" name="" id="" placeholder="Enter Business Address e.g: No 7 Mayweather Close...">
+        <input class="bg-transparent w-80 text-xs ml-4" type="text" v-model="businessAddress" id="" placeholder="Enter Business Address e.g: No 7 Mayweather Close..." required>
       </div>
 
       <div class="flex flex-row p-2 border-0 rounded-full bg-gray-100">
         <solid-mail-icon class="w-5 h-5 text-a2yellow"/>
-        <input class="bg-transparent w-80 text-xs ml-4" type="email" name="" id="" placeholder="Enter email: joecollections@gmail.com">
+        <input class="bg-transparent w-80 text-xs ml-4" type="email" v-model="email" id="" placeholder="Enter email: joecollections@gmail.com" required>
       </div>
 
       <div class="flex flex-row p-2 border-0 rounded-full bg-gray-100">
         <solid-user-circle-icon class="w-5 h-5 text-a2yellow"/>
-        <input class="bg-transparent w-80 text-xs ml-4" type="rext" name="" id="" placeholder="Choose a username">
+        <input class="bg-transparent w-80 text-xs ml-4" type="rext" v-model="username" id="" placeholder="Choose a username" required>
       </div>
 
       <div class="flex flex-row p-2 border-0 rounded-full bg-gray-100">
         <solid-shield-exclamation-icon class="w-5 h-5 text-a2yellow"/>
-        <input class="bg-transparent w-80 text-xs ml-4" type="password" name="" id="" placeholder="Type a password">
+        <input class="bg-transparent w-80 text-xs ml-4" type="password" v-model="password" id="" placeholder="Type a password" required>
       </div>
 
       <div class="flex flex-row p-2 border-0 rounded-full bg-gray-100">
         <solid-shield-check-icon class="w-5 h-5 text-a2yellow"/>
-        <input class="bg-transparent w-80 text-xs ml-4" type="password" name="" id="" placeholder="Retype Password">
+        <input class="bg-transparent w-80 text-xs ml-4" type="password" v-model="retypePassword" id="" placeholder="Retype Password" required>
       </div>
 
-      <div class="flex flex-row justify-center p-2 border-0 rounded-full bg-a2blue mt-4">
+      <div :class="btnEnabled" class="flex flex-row justify-center p-2 border-0 rounded-full bg-a2blue mt-4">
         <solid-badge-check-icon class="w-5 h-5 text-a2yellow"/>
-        <input class="text-a2yellow bg-transparent text-xs ml-1" type="submit" name="" id="" value="REGISTER">
+        <input @click="registerMerchant(e)" class="text-a2yellow bg-transparent text-xs ml-1" type="submit" name="" id="" value="REGISTER" required>
       </div>
     </form>
 
@@ -52,3 +52,30 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      businessName: null,
+      businessAddress: null,
+      email: null,
+      username: null,
+      password: null,
+      retypePassword: null,
+      registering: false,
+      btnEnabled: "disabled:opacity-75"
+    }
+  },
+
+  methods: {
+    registerMerchant(e) {
+      e.preventDefault();
+
+    },
+    isRequired(value) {
+      return value ? true : 'This field is required';
+    },
+  },
+}
+</script>
