@@ -10,7 +10,10 @@
 
       <div class="flex flex-row p-2 border-0 rounded-full bg-gray-100">
         <solid-office-building-icon class="w-5 h-5 text-a2yellow"/>
-        <input class="bg-transparent w-80 text-xs ml-4" type="text" v-model="businessName" id="" placeholder="Enter Business Name e.g: Joe Collections" required>
+        <ValidationProvider rules="secret" v-slot="{ errors }">
+          <input class="bg-transparent w-80 text-xs ml-4" type="text" v-model="businessName" id="" placeholder="Enter Business Name e.g: Joe Collections" required>
+          <span>{{ errors[0] }}</span>
+        </ValidationProvider>
       </div>
 
       <div class="flex flex-row p-2 border-0 rounded-full bg-gray-100">
@@ -57,7 +60,12 @@
 </template>
 
 <script>
+// import { ValidationObserver, ValidationProvider } from "nuxt-validate"
 export default {
+  // components: {
+  //   ValidationObserver,
+  //   ValidationProvider
+  // },
   data() {
     return {
       businessName: null,
