@@ -104,7 +104,7 @@ export default {
       // alert('Form has been submitted!');
       const formData = {
         businessName: this.businessName,
-        businessAddress: this.businessAddress,
+        address: this.businessAddress,
         email: this.email,
         username: this.username,
         password: this.password,
@@ -119,7 +119,8 @@ export default {
           this.$router.push("/merchant/login")
       }
       } catch (error) {
-        this.$toast.error("Something went wrong, please try again").goAway(3000)
+        // console.log(error.response);
+        this.$toast.error(error.message).goAway(3000)
         this.registering = false
       }
 
