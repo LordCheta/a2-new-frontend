@@ -98,7 +98,6 @@ export default {
       registering: false,
     }
   },
-
   methods: {
    async onSubmit() {
       // alert('Form has been submitted!');
@@ -115,7 +114,8 @@ export default {
         let newMerchant = await this.$axios.$post('/merchants/auth/register', formData)
         if (newMerchant) {
           this.resetForm()
-          this.$toast.success('Registration Succesful').goAway(3000)
+          this.$toast.success('Registration Successful').goAway(3000)
+          this.registering = false
           this.$router.push("/merchant/login")
       }
       } catch (error) {
