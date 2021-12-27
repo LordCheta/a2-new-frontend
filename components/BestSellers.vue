@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     productPicture(productImageUrl) {
-      return `http://localhost:1337${productImageUrl}`
+      return `${process.env.baseUrl}${productImageUrl}`
     }
   }
 }

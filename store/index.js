@@ -1,6 +1,10 @@
 export const state = () => ({
   customer: {
     cart:[]
+  },
+  merchant: {
+    user: {},
+    products: []
   }
 });
 
@@ -19,11 +23,20 @@ export const getters = {
 
     return size
   },
+  merchantUserDetails: (state) => () => {
+    return state.merchant.user
+  },
+  merchantProducts: (state) => () => {
+    return state.merchant.products
+  }
 }
 
 export const mutations = {
   addToCustomerCart(state, product) {
     state.customer.cart.push(product)
+  },
+  setMerchantUser(state, data) {
+    state.merchant.user = data
   }
 }
 

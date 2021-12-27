@@ -25,6 +25,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    "~/plugins/vee-validate.js"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -46,13 +47,13 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxt/http',
     '@nuxtjs/auth-next',
-    'nuxt-validate'
+    '@nuxtjs/toast',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: ["vee-validate/dist/rules"],
   },
 
   // tailwind
@@ -80,19 +81,17 @@ export default {
   },
 
   // environment variables
-  publicRuntimeConfig: {
+  env: {
     baseUrl: process.env.BASE_URL
   },
 
   // vee-validate
-  nuxtValidate: {
-    lang: 'en',
-    nuxti18n: {
-      locale: {
-        // 'zh-CN': 'zh_CN'
-      }
-    }
-  },
+  // nuxtValidate: {
+  //   lang: 'en',
+  //   nuxti18n: {
+  //     rules: undefined
+  //   }
+  // },
 
   /*
    ** Set ssr to false to see the loading indicator - https://nuxtjs.org/docs/2.x/features/rendering-modes
@@ -106,5 +105,19 @@ export default {
      name: 'chasing-dots',
      color: '#ffae00',
      background: '#32324e'
-   }
+   },
+
+  //  Toaster Message plugin
+   toast: {
+    position: 'top-center',
+    register: [ // Register custom toasts
+      {
+        name: 'my-error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
+  }
 }
