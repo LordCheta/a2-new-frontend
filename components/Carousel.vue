@@ -2,8 +2,9 @@
   <section class="flex flex-col p-4">
     <div class="w-full flex justify-center overflow-hidden">
       <div class="inner w-screen" ref="inner" :style="innerStyles">
-        <div class="inline-flex mr-3 justify-center items-center w-screen h-96 text-white bg-a2blue" v-for="card in cards" :key="card">
-          {{ card }}
+        <div class="inline-flex mr-3 justify-center items-center w-screen h-carousel text-white" v-for="(card, index) in cards" :key="index">
+          <!-- <p class="text-a2blue">{{ card }}</p> -->
+          <img class="h-full w-full" :src="imageUrl(card)" :alt="card">
         </div>
       </div>
     </div>
@@ -19,7 +20,15 @@
 export default {
   data () {
     return {
-      cards: ["Advert Item 1", "Advert Item 2", "Advert Item 3", "Advert Item 4", "Advert Item 5", "Advert Item 6", "Advert Item 7", "Advert Item 8"],
+      cards: [
+        "shop-open.jpeg",
+        "shop-online.jpg",
+        "shop-open.jpeg",
+        "shop-open.jpeg",
+        "shop-open.jpeg",
+        "shop-open.jpeg",
+        "shop-open.jpeg",
+        "shop-open.jpeg"],
       innerStyles: {},
       step: '',
       transitioning: false
@@ -81,6 +90,9 @@ export default {
         transition: 'none',
         transform: `translateX(-${this.step})`
       }
+    },
+    imageUrl(src) {
+      return require(`~/assets/images/${src}`)
     }
   }
 }
@@ -100,11 +112,14 @@ export default {
   margin-right: 10px;
   display: inline-flex;
   /* optional */
-  height: 40px;
+  /* height: 40px; */
   background-color: #39b1bd;
   color: white;
   border-radius: 4px;
   align-items: center;
   justify-content: center;
+}
+.h-carousel{
+  height: 500px;
 }
 </style>

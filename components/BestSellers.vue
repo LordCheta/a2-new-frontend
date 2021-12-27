@@ -7,11 +7,17 @@
 
     <div class="flex flex-col">
       <div v-if="$fetchState.pending">
-        loading...
+        <svg class="animate-spin h-5 w-5 mr-3 border-b-2 border-r-2 rounded-full border-a2blue" viewBox="0 0 24 24">
+            <!-- ... -->
+          </svg>
       </div>
 
-      <div v-else-if="$fetchState.error">
-            {{$fetchState}}
+      <div class=" mt-8" v-else-if="$fetchState.error">
+            <!-- {{$fetchState}} -->
+          <div class="flex flex-row justify-center">
+            <img class="fw-40 h-40" src="~/assets/images/empty.svg" alt=""><br>
+          </div>
+          <p class="flex flex-row justify-center text-red-900 text-md font-thin">Something went wrong, please refresh the page</p>
       </div>
 
       <div v-else class="flex flex-wrap justify-start content-center mt-8 gap-5">
