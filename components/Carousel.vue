@@ -37,6 +37,7 @@ export default {
   mounted () {
     this.setStep()
     this.resetTranslate()
+    this.autoScroll()
   },
   methods: {
     setStep () {
@@ -93,6 +94,11 @@ export default {
     },
     imageUrl(src) {
       return require(`~/assets/images/${src}`)
+    },
+    autoScroll() {
+      setInterval(() => {
+        this.next()
+      }, 5000);
     }
   }
 }
