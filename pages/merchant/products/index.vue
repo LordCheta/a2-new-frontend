@@ -9,6 +9,7 @@
     </div> <hr>
 
         <div class="px-10 mt-10">
+
           <table class="w-full bg-white shadow">
             <thead>
               <tr class="text-md border bg-gray-200">
@@ -24,7 +25,7 @@
             </thead>
 
             <tbody>
-              <tr class="text-a2blue font-light">
+              <!-- <tr class="text-a2blue font-light">
                 <td class="p-4 border-b border-r">1</td>
                 <td class="p-4 border-b border-r">Beach Shirt</td>
                 <td class="p-4 border-b border-r">Very fine beach shirt</td>
@@ -44,6 +45,17 @@
                 <td class="p-4 border-b border-r">Published</td>
                 <td class="p-4 border-b border-r">Thursday, 9th December. 9pm</td>
                 <td class="p-4 border-b"><span class="bg-green-900 text-white p-1 rounded-full">edit</span> <span class="bg-red-900 text-white p-1 rounded-full">delete</span></td>
+              </tr> -->
+
+              <tr class="text-a2blue font-light" v-for="product in merchantProducts()" :key="index">
+                <td class="p-4 border-b border-r">{{product.id}}</td>
+                <td class="p-4 border-b border-r">{{product.title}}</td>
+                <td class="p-4 border-b border-r">{{product.description}}</td>
+                <td class="p-4 border-b border-r">₦{{product.price}}</td>
+                <td class="p-4 border-b border-r">{{product.category}}</td>
+                <td class="p-4 border-b border-r">{{product.status}}</td>
+                <td class="p-4 border-b border-r">{{product.created_at}}</td>
+                <td class="p-4 border-b"><span class="bg-green-900 text-white p-1 rounded-full">edit</span> <span class="bg-red-900 text-white p-1 rounded-full">delete</span></td>
               </tr>
             </tbody>
         </table>
@@ -52,7 +64,18 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 export default {
-  layout: "merchant"
+  layout: "merchant",
+  middleware: 'merchantAuth',
+  data() {
+    return {
+      products: []
+    }
+  },
+  computed: {
+    ...mapGetters(['merchantProducts'])
+  }
 }
 </script>

@@ -49,6 +49,7 @@
 <script>
 export default {
   layout: "merchant",
+  middleware: 'merchantAuth',
 
   data() {
     return {

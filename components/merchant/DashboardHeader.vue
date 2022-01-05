@@ -8,8 +8,25 @@
     </div>
 
     <div class="flex w-1/2 justify-end p-3 gap-x-2">
-      <h4 class="text-white font-bold tracking-wider">Zynex Collection</h4>
+      <h4 class="text-white font-bold tracking-wider">{{businessName}}</h4>
       <solid-user-circle-icon class="w-6 h-6 flex text-a2yellow"/>
     </div>
   </header>
 </template>
+
+<script>
+import { mapGetters } from "vuex"
+export default {
+  computed: {
+    ...mapGetters(['merchantBusinessDetails'])
+  },
+  data() {
+    return {
+      businessName: null
+    }
+  },
+  mounted() {
+      this.businessName = this.merchantBusinessDetails().businessName
+  },
+}
+</script>

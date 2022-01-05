@@ -46,7 +46,9 @@
 
 <script>
 export default {
-  layout: "merchant"
+  layout: 'merchant',
+  middleware: 'merchantAuth'
+
 }
 </script>
 

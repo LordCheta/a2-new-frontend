@@ -39,6 +39,9 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate/dist/vee-validate.full.esm"
+import { mapMutations } from "vuex"
+import { setMerchantLocalStorageData, getMerchantLocalStorageData } from "~/helpers/storage"
+
 export default {
   components: {
     ValidationObserver,
@@ -52,6 +55,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['setMerchantUser', 'setMerchantBusiness', 'setMerchantProduct']),
     async submit(e) {
       e.preventDefault()
       const formData = {
@@ -61,15 +65,41 @@ export default {
       try {
         this.loggingIn = true
         let merchant = await this.$axios.$post('/auth/local', formData)
+
+        // This api call gets the merchant details which also includes the products
+        // let merchantProducts = await this.$axios.$get('/merchants/'+merchant.user.merchant.id)
+
+
         if (merchant) {
+
           this.resetForm()
 
           this.$toast.success('Login Successful').goAway(3000)
           this.loggingIn = false
-          this.$router.push("/merchant/dashboard")
+          let userData = {
+            token: merchant.jwt,
+            userId: merchant.user.id,
+            merchantId: merchant.user.merchant.id,
+            username: merchant.user.username,
+            email: merchant.user.email,
+          }
+
+          let businessData = {
+            id: merchant.user.merchant.id,
+            address: merchant.user.merchant.address,
+            businessName: merchant.user.merchant.businessName,
+            accountNumber: merchant.user.merchant.accountNumber,
+            accountName: merchant.user.merchant.accountName,
+            bankName: merchant.user.merchant.bankName,
+          }
+          // this.setMerchantUser(userData);
+          // this.setMerchantBusiness(businessData);
+          setMerchantLocalStorageData(userData)
+
+          this.$router.push("/merchant/dashboard");
         }
       } catch (error) {
-        console.log(error.response)
+        console.log(error)
         // error.response.data.message.map(e => this.$toast.error(e.message).goAway(3000))
         this.$toast.error("Username or Password Incorrect").goAway(3000)
         this.loggingIn = false

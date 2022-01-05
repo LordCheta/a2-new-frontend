@@ -3,7 +3,8 @@ export const state = () => ({
     cart:[]
   },
   merchant: {
-    user: {},
+    user: null,
+    business: null,
     products: []
   }
 });
@@ -26,6 +27,9 @@ export const getters = {
   merchantUserDetails: (state) => () => {
     return state.merchant.user
   },
+  merchantBusinessDetails: (state) => () => {
+    return state.merchant.business
+  },
   merchantProducts: (state) => () => {
     return state.merchant.products
   }
@@ -37,6 +41,17 @@ export const mutations = {
   },
   setMerchantUser(state, data) {
     state.merchant.user = data
+  },
+  setMerchantBusiness(state, data) {
+    state.merchant.business = data
+  },
+  setMerchantProduct(state, data) {
+    if (data.length == 0) return
+
+    data.forEach(product => {
+      state.merchant.products.push = product
+    });
+
   }
 }
 
