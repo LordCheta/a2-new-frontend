@@ -30,7 +30,7 @@
     <section class="flex justify-evenly flex-wrap content-center h-48 bg-gray-900">
       <div class="flex flex-col">
         <h3 class="text-a2yellow font-extrabold mb-2">About A2</h3>
-        <NuxtLink to="/" class=" text-gray-400 text-sm">Contact Us</NuxtLink>
+        <NuxtLink to="/contact" class=" text-gray-400 text-sm">Contact Us</NuxtLink>
         <NuxtLink to="/about" class=" text-gray-400 text-sm">About Us</NuxtLink>
         <NuxtLink to="/" class=" text-gray-400 text-sm">Terms & Conditions</NuxtLink>
         <NuxtLink to="/" class=" text-gray-400 text-sm">Privacy Policy</NuxtLink>
@@ -42,7 +42,7 @@
         <NuxtLink to="/" class=" text-gray-400 text-sm">Delivery</NuxtLink>
         <NuxtLink to="/" class=" text-gray-400 text-sm">FAQs</NuxtLink>
         <NuxtLink to="/" class=" text-gray-400 text-sm">A2 Return Policy</NuxtLink>
-        <NuxtLink to="/" class=" text-gray-400 text-sm">Contact Us</NuxtLink>
+        <NuxtLink to="/contact" class=" text-gray-400 text-sm">Contact Us</NuxtLink>
       </div >
 
       <div class="flex flex-col">
