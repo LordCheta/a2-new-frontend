@@ -2,7 +2,7 @@
   <footer class="flex flex-col w-screen">
     <section class="flex justify-evenly flex-wrap content-center bg-a2blue h-36">
       <div>
-        <img src="~/assets/images/a2logo-white-black.png" class="w-14 h-14" alt="a2-logo">
+        <img src="~/assets/images/a2logonew-white.png" class="w-32 h-18" alt="a2-logo">
         <p class="mt-2 text-sm font-poppins text-a2yellow">Great mall, Big rewards</p >
       </div>
 

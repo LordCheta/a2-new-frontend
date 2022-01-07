@@ -2,7 +2,7 @@
   <header class="p-3 w-screen shadow flex flex-row bg-a2blue">
     <div class="flex flex-col w-1/2 gap-y-1">
       <NuxtLink to="/merchant/dashboard">
-        <img src="~/assets/images/a2logo-white-black.png" class="w-14 ml-3"/>
+        <img src="~/assets/images/a2logonew-yellow.png" class="w-44 ml-3"/>
       </NuxtLink>
       <p class="text-xs text-white"><span class="text-a2yellow font-black">_</span>MERCHANT DASHBOARD<span class="text-a2yellow font-black">_</span></p>
     </div>

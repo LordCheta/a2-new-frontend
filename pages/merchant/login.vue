@@ -1,7 +1,7 @@
 <template>
   <div class="w-screen h-screen bg-gray-300 flex flex-col items-center justify-center content-start">
     <NuxtLink to="/">
-      <img src="~/assets/images/a2logo-black.png" class="w-24"/>
+      <img src="~/assets/images/a2logonew.png" class="w-44"/>
     </NuxtLink>
     <h3 class="text-a2blue text-3xl font-bold">Manage your <span class="text-a2yellow">Merchant</span> Account</h3>
     <p class="text-sm text-a2blue tracking-widest">enjoy higher turnover and good profit!</p>
