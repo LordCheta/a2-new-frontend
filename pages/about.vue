@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen">
+  <div>
     <section class="bg-purple-50 p-40">
       <h2 class="font-black text-5xl text-a2-blue">Our Mission</h2>
 
@@ -50,21 +50,32 @@
       </section>
     </section>
 
-    <section class="">
-      <h2>History</h2>
-      <p>
-      A2Mall started in February 2018, intending to try out a new marketing strategy by building relationships. The possibility of creating a business out of a passion for looking good.
+    <section class="bg-a2blue p-40 border-b">
+      <h2 class="font-black text-5xl text-white">History</h2>
 
- A2Mall was all about connectivity and grew to 11 states in the country, supplying quality clothing and making friends.
+      <div class="mt-10 flex flex-col gap-y-10">
+        <p class="text-white text-md font-thin">
+          A2Mall started in February 2018, intending to try out a new marketing strategy by building relationships. The possibility of creating a business out of a passion for looking good.
+        </p>
 
- 2019 brought A2Mall to base in Lagos as we tried to create a bigger community, making friends and improving our looks.
+        <p class="text-white text-md font-thin">
+          A2Mall was all about connectivity and grew to 11 states in the country, supplying quality clothing and making friends.
+        </p>
 
- 2020 A2Mall concentrated more on creating more friends and growing the community, customer satisfaction and Sales.
+        <p class="text-white text-md font-thin">
+          2019 brought A2Mall to base in Lagos as we tried to create a bigger community, making friends and improving our looks.
+        </p>
 
- 2021 A2Mall started its  E-commerce business, to empower people and give them an extra means of income by doing the same things they do every day.
-    </p>
+        <p class="text-white text-md font-thin">
+          2020 A2Mall concentrated more on creating more friends and growing the community, customer satisfaction and Sales.
+        </p>
+
+        <p class="text-white text-md font-thin">
+          2021 A2Mall started its  E-commerce business, to empower people and give them an extra means of income by doing the same things they do every day.
+        </p>
+      </div>
+
     </section>
-
   </div>
 </template>
 
