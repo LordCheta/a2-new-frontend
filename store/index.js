@@ -53,12 +53,14 @@ export const mutations = {
     }
 
     if (data.constructor === Array) {
-      
+
       if (data.length == 0) return
 
       data.forEach(product => {
         state.merchant.products.push(product)
       });
+
+      return;
     }
 
     state.merchant.products.push(data)
