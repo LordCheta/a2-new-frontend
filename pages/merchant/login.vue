@@ -92,8 +92,6 @@ export default {
             accountName: merchant.user.merchant.accountName,
             bankName: merchant.user.merchant.bankName,
           }
-          // this.setMerchantUser(userData);
-          // this.setMerchantBusiness(businessData);
           setMerchantLocalStorageData(userData)
 
           this.$router.push("/merchant/dashboard");

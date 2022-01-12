@@ -2,7 +2,7 @@
   <header class="w-screen flex justify-evenly bg-white p-4 h-24">
 
       <NuxtLink to="/" class="font-mont text-a2yellow text-sm p-4">
-        <img src="~/assets/images/a2logonew.png" class="w-40"/>
+        <img src="~/assets/images/a2logonew.png" class="w-44"/>
       </NuxtLink>
 
       <HeaderSearch class="m-4"/>

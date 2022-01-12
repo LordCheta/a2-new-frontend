@@ -4,7 +4,7 @@
       <h1 class="text-a2blue text-2xl font-light w-1/2">Add a new product</h1>
 
       <div class="w-1/2 flex justify-end items-center">
-        <nuxt-link class="px-6 py-2 bg-green-400 text-white w-36 rounded-3xl flex justify-center" to="/merchant/products/new-product">save</nuxt-link>
+        <button @click="uploadNewProduct()" class="px-6 py-2 bg-green-400 text-white w-36 rounded-3xl flex justify-center" to="/merchant/products/new-product">save</button>
       </div>
     </div> <hr>
 
@@ -31,7 +31,7 @@
 
             <div class="flex flex-col">
               <label class="text-a2blue mb-4" for="title">Image</label>
-              <input class="w-80 p-2" type="file" name="image" @change="image" required>
+              <input class="w-80 p-2" type="file" name="image" @change="uploadFile()" accept="image/*" ref="file" required>
             </div>
         </div>
 
@@ -56,8 +56,8 @@
             <div class="flex flex-col">
               <label class="text-a2blue mb-4" for="title">Status</label>
               <select v-model="pubStatus" class="w-80 p-2 border" name="status" id="" required>
-                <option>Published</option>
-                <option>Draft</option>
+                <option>published</option>
+                <option>draft</option>
               </select>
             </div>
         </div>
@@ -67,10 +67,13 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex"
+import storage from "~/mixins/storage"
+import slugify from "slugify"
+
 export default {
   layout: "merchant",
   middleware: 'merchantAuth',
-
   data() {
     return {
       pubStatus: null,
@@ -79,6 +82,74 @@ export default {
       price: null,
       description: null,
       title: null
+    }
+  },
+  mixins: [storage],
+  methods: {
+    ...mapGetters(['merchantUserDetails', 'merchantBusinessDetails']),
+    ...mapMutations(['setMerchantProduct']),
+    uploadFile() {
+      this.image = this.$refs.file.files[0]
+    },
+    async uploadNewProduct() {
+      try {
+        let data = {
+          title: this.title,
+          description: this.description,
+          price: this.price,
+          category: this.category,
+          slug: slugify(this.title),
+          status: this.pubStatus
+        }
+
+        let fieldErrors = []
+        for (const key in data) {
+          if (data[key] == null) {
+            this.$toast.error(`${key} is required`).goAway(3000)
+            fieldErrors.push(data);
+          }
+        }
+
+        if (fieldErrors.length > 0) return
+
+        // Upload Image
+        let imageData = new FormData()
+        imageData.append('files', this.image)
+        let image = await this.$axios.$post('/upload', imageData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+      })
+
+      const merchantUserDetails = this.merchantUserDetails()
+
+        // upload product
+        data.image = image.id
+        data.merchant = merchantUserDetails().merchant
+
+        // Upload New Product
+        let newProduct = await this.$axios.$post('/products',  data)
+
+        // Add new product to the merchant profile
+        this.setMerchantProduct(newProduct)
+
+        this.$toast.success("Product Created Successfully").goAway(3000)
+
+        this.resetForm()
+
+        this.$router.push("/merchant/products")
+      } catch(e) {
+        console.log(e.response);
+        this.$toast.error(e).goAway(3000)
+      }
+    },
+    resetForm() {
+      this.pubStatus = null,
+      this.category = null,
+      this.image = null,
+      this.price = null,
+      this.description = null,
+      this.title = null
     }
   },
 }

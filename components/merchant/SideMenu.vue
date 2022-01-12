@@ -56,6 +56,8 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex"
+import { setMerchantLocalStorageData, getMerchantLocalStorageData } from "~/helpers/storage"
 export default {
   data() {
     return {
@@ -63,7 +65,12 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['setMerchantUser', 'setMerchantBusiness', 'setMerchantProduct']),
     logout() {
+      setMerchantLocalStorageData(null)
+      this.setMerchantUser(null)
+        this.setMerchantProduct(null)
+        this.setMerchantBusiness(null)
       this.$router.push("/merchant/login")
     }
   },

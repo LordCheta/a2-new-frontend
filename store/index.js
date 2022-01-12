@@ -46,11 +46,22 @@ export const mutations = {
     state.merchant.business = data
   },
   setMerchantProduct(state, data) {
-    if (data.length == 0) return
+    if (data == null) {
+      state.merchant.products = []
 
-    data.forEach(product => {
-      state.merchant.products.push = product
-    });
+      return
+    }
+
+    if (data.constructor === Array) {
+      
+      if (data.length == 0) return
+
+      data.forEach(product => {
+        state.merchant.products.push(product)
+      });
+    }
+
+    state.merchant.products.push(data)
 
   }
 }
