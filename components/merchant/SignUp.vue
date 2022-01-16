@@ -17,7 +17,7 @@
           </ValidationProvider>
 
 
-        <ValidationProvider name="Business Address" :rules="{ alpha_spaces, required }" v-slot="{ errors }">
+        <ValidationProvider name="Business Address" :rules="{ required }" v-slot="{ errors }">
           <div class="flex flex-row p-2 border-0 rounded-full bg-gray-100">
             <solid-location-marker-icon class="w-5 h-5 text-a2yellow"/>
             <input class="bg-transparent w-80 text-xs ml-4 outline-none" type="text" v-model="businessAddress" placeholder="Enter Business Address e.g: No 7 Mayweather Close..." required>

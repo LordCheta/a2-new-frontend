@@ -6,8 +6,10 @@
     </div>
 
     <div class="flex flex-col">
-      <div v-if="$fetchState.pending">
-        loading...
+      <div v-if="$fetchState.pending" class="flex flex-row justify-center">
+        <svg class="animate-spin h-5 w-5 mr-3 border-b-2 border-r-2 rounded-full border-a2blue" viewBox="0 0 24 24">
+            <!-- ... -->
+        </svg>
       </div>
 
       <div v-else-if="$fetchState.error">

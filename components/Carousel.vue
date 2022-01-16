@@ -21,9 +21,9 @@ export default {
   data () {
     return {
       cards: [
-        "shop-open.jpeg",
+        "moving_slides.png",
         "shop-online.jpg",
-        "shop-open.jpeg",
+        "become_a_merchant.png",
         "shop-open.jpeg",
         "shop-open.jpeg",
         "shop-open.jpeg",
