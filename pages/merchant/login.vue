@@ -97,9 +97,17 @@ export default {
           this.$router.push("/merchant/dashboard");
         }
       } catch (error) {
-        console.log(error)
-        // error.response.data.message.map(e => this.$toast.error(e.message).goAway(3000))
-        this.$toast.error("Username or Password Incorrect").goAway(3000)
+
+        if (error.response?.data?.data) {
+          let errorArray = error.response.data.data[0].messages
+          errorArray.forEach(e => {
+            this.$toast.error(e.message).goAway(3000)
+            this.loggingIn = false
+          });
+          return
+        }
+
+        this.$toast.error(error.message).goAway(3000)
         this.loggingIn = false
       }
     },
