@@ -78,12 +78,17 @@ import {mapGetters} from "vuex"
         for (const product of this.customerCart()) {
           subtotal = subtotal + +(product.userRequestedQty * product.productPrice).toFixed(2)
         }
-        return this.cartSubtotal = subtotal.toFixed(2)
+        this.cartSubtotal = subtotal.toFixed(2)
+
+        return subtotal
       }
     },
     methods: {
       calcCartTotal() {
         return this.total = +this.cartSubtotal + +this.deliveryFee
+      },
+      processPayment() {
+
       }
     },
   }

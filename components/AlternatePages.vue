@@ -13,6 +13,7 @@
       <solid-view-grid-add-icon v-if="automobile"  class="w-14 h-14 text-a2blue"/>
       <solid-tag-icon v-if="best_sellers"  class="w-14 h-14 text-a2blue"/>
       <solid-cube-icon v-if="new_additions"  class="w-14 h-14 text-a2blue"/>
+      <solid-duplicate-icon v-if="others"  class="w-14 h-14 text-a2blue"/>
       <h1 class="text-a2blue text-5xl font-extralight tracking-wider">{{title}}</h1>
     </div>
 
@@ -53,7 +54,8 @@ export default {
       sports_goods: false,
       automobile: false,
       best_sellers: false,
-      new_additions: false
+      new_additions: false,
+      others: false,
     }
   },
   methods: {
@@ -95,6 +97,8 @@ export default {
         case "new_additions":
           this.new_additions = true
           break;
+        default:
+          this.others = true
       }
     }
   },

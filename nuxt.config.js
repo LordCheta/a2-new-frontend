@@ -25,7 +25,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    "~/plugins/vee-validate.js"
+    "@/plugins/vee-validate.js",
+    '@/plugins/axios'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -64,6 +65,7 @@ export default {
   //  axios
   axios: {
     baseURL: process.env.BASE_URL,
+    progress: true
     // proxy: true
   },
 
@@ -82,7 +84,8 @@ export default {
 
   // environment variables
   env: {
-    baseUrl: process.env.BASE_URL
+    baseUrl: process.env.BASE_URL,
+    flutterwave_public_key: process.env.FLUTTWERWAVE_PUBLIC_KEY
   },
 
   // vee-validate

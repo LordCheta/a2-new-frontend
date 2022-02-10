@@ -7,8 +7,17 @@
   </template>
 
 <script>
+import { mapMutations, mapGetters } from "vuex"
+
 export default {
   layout: "merchant",
-  middleware: 'merchantAuth'
+  middleware: 'merchantAuth',
+   methods: {
+    ...mapMutations(['setMerchantUser', 'setMerchantBusiness', 'setMerchantProduct']),
+    ...mapGetters(['merchantUserDetails']),
+  },
+  mounted() {
+    this.$axios.setToken(this.merchantUserDetails.token, 'Bearer')
+  }
 }
 </script>

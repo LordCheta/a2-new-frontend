@@ -17,7 +17,7 @@
                 <th class="border-r border-a2blue  font-extralight">Title</th>
                 <th class="border-r  border-a2blue font-extralight">Description</th>
                 <th class="border-r border-a2blue  font-extralight">Price</th>
-                <th class="border-r border-a2blue  font-extralight">Category</th>
+                <!-- <th class="border-r border-a2blue  font-extralight">Category</th> -->
                 <th class="border-r border-a2blue  font-extralight">Status</th>
                 <th class="border-r border-a2blue  font-extralight">Created At</th>
                 <th class="font-extralight">Actions</th>
@@ -47,12 +47,12 @@
                 <td class="p-4 border-b"><span class="bg-green-900 text-white p-1 rounded-full">edit</span> <span class="bg-red-900 text-white p-1 rounded-full">delete</span></td>
               </tr> -->
 
-              <tr class="text-a2blue font-light" v-for="product in merchantProducts()" :key="index">
+              <tr class="text-a2blue font-light" v-for="product in products" :key="index">
                 <td class="p-4 border-b border-r">{{product.id}}</td>
                 <td class="p-4 border-b border-r">{{product.title}}</td>
                 <td class="p-4 border-b border-r">{{product.description}}</td>
                 <td class="p-4 border-b border-r">₦{{product.price}}</td>
-                <td class="p-4 border-b border-r">{{product.category}}</td>
+                <!-- <td class="p-4 border-b border-r">{{product.category.name}}</td> -->
                 <td class="p-4 border-b border-r">{{product.status}}</td>
                 <td class="p-4 border-b border-r">{{product.created_at}}</td>
                 <td class="p-4 border-b"><span class="bg-green-900 text-white p-1 rounded-full">edit</span> <span class="bg-red-900 text-white p-1 rounded-full">delete</span></td>
@@ -71,12 +71,19 @@ export default {
   middleware: 'merchantAuth',
   data() {
     return {
-      products: []
+      products: null
     }
   },
-  computed: {
-    ...mapGetters(['merchantProducts']),
-    
+  methods: {
+    ...mapGetters(['merchantProducts', 'merchantUserDetails']),
+  },
+   mounted() {
+    let getDets = this.merchantUserDetails()
+    this.$axios.setToken(getDets().token, 'Bearer')
+
+    const products = this.merchantProducts()
+
+    this.products = products()
   }
 }
 </script>

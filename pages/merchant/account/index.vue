@@ -67,6 +67,9 @@ export default {
   middleware: 'merchantAuth',
 
   mounted() {
+    let getDets = this.merchantUserDetails()
+    this.$axios.setToken(getDets().token, 'Bearer')
+    
     let merchantBusinessDetails = this.merchantBusinessDetails()
     let merchantUserDetails = this.merchantUserDetails()
 

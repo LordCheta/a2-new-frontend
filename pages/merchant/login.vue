@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen h-screen bg-gray-300 flex flex-col items-center justify-center content-start">
+  <div class="w-screen h-screen bg-gray-400 flex flex-col items-center justify-center content-start">
     <NuxtLink to="/">
       <img src="~/assets/images/a2logonew.png" class="w-44"/>
     </NuxtLink>
@@ -10,7 +10,7 @@
 
       <div class="flex flex-row p-2 border-0 rounded-full bg-gray-100">
         <solid-user-circle-icon class="w-5 h-5 text-a2yellow"/>
-        <input v-model="identifier" class="bg-transparent w-80 text-xs ml-4 outline-none" type="rext" name="" id="" placeholder="Email or Username" required>
+        <input v-model="identifier" class="bg-transparent w-80 text-xs ml-4 outline-none" type="text" name="" id="" placeholder="Email or Username" required>
       </div>
 
       <div class="flex flex-row p-2 border-0 rounded-full bg-gray-100">
@@ -18,12 +18,20 @@
         <input v-model="password" class="bg-transparent w-80 text-xs ml-4 outline-none" type="password" name="" id="" placeholder="Password" required>
       </div>
 
+      <div class="flex justify-end gap-x-1">
+        <solid-lock-closed-icon class="w-4 h-4"/>
+        <nuxt-link class="text-xs text-a2yellow" to="/forgot-password">forgot password?</nuxt-link>
+      </div>
+
       <button @click="submit($event)" type="submit" class="flex flex-row justify-center p-2 border-0 rounded-full bg-a2blue mt-4">
         <svg v-if="loggingIn" class="animate-spin h-5 w-5 mr-3 border-b-2 border-r-2 rounded-full border-a2yellow" viewBox="0 0 24 24">
             <!-- ... -->
         </svg>
-        <solid-check-circle-icon class="w-5 h-5 text-a2yellow"/>
-        <span v-if="!loggingIn" class="text-a2yellow bg-transparent text-xs ml-1">LOGIN</span>
+
+        <span class="flex flex-row" v-if="!loggingIn">
+          <solid-check-circle-icon class="w-5 h-5 text-a2yellow"/>
+          <span class="text-a2yellow bg-transparent text-xs ml-1">LOGIN</span>
+        </span>
       </button>
     </form>
 
@@ -39,8 +47,10 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate/dist/vee-validate.full.esm"
-import { mapMutations } from "vuex"
+import { mapMutations, mapGetters } from "vuex"
 import { setMerchantLocalStorageData, getMerchantLocalStorageData } from "~/helpers/storage"
+import registerToken from "@/plugins/axios";
+// import axios from "@/plugins/axios";
 
 export default {
   components: {
@@ -56,6 +66,7 @@ export default {
   },
   methods: {
     ...mapMutations(['setMerchantUser', 'setMerchantBusiness', 'setMerchantProduct']),
+    ...mapGetters(['merchantUserDetails']),
     async submit(e) {
       e.preventDefault()
       const formData = {
@@ -74,8 +85,6 @@ export default {
 
           this.resetForm()
 
-          this.$toast.success('Login Successful').goAway(3000)
-          this.loggingIn = false
           let userData = {
             token: merchant.jwt,
             userId: merchant.user.id,
@@ -94,6 +103,8 @@ export default {
           }
           setMerchantLocalStorageData(userData)
 
+          this.$toast.success('Login Successful').goAway(3000)
+          this.loggingIn = false
           this.$router.push("/merchant/dashboard");
         }
       } catch (error) {

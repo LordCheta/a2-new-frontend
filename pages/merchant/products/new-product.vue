@@ -14,48 +14,41 @@
         <div class="flex flex-row justify-center gap-x-10">
             <div class="flex flex-col">
               <label class="text-a2blue mb-4" for="title">Title</label>
-              <input class="w-80 p-2 border" type="text" name="title" v-model="title" required>
+              <input class="w-80 p-2 border outline-none" type="text" name="title" v-model="title" required>
             </div>
 
             <div class="flex flex-col">
               <label class="text-a2blue mb-4" for="title">Description</label>
-              <input class="w-80 p-2 border" type="text" name="title" v-model="description" required>
+              <input class="w-80 p-2 border outline-none" type="text" name="title" v-model="description" required>
             </div>
         </div>
 
         <div class="flex flex-row justify-center gap-x-10">
             <div class="flex flex-col">
               <label class="text-a2blue mb-4" for="title">Price</label>
-              <input class="w-80 p-2 border" type="number" name="price" v-model="price" min="1" required>
+              <div class="flex flex-row p-2 border">
+                <p>₦</p>
+                <input class="w-80 outline-none" type="number" name="price" v-model="price" min="1" required>
+              </div>
             </div>
 
             <div class="flex flex-col">
               <label class="text-a2blue mb-4" for="title">Image</label>
-              <input class="w-80 p-2" type="file" name="image" @change="uploadFile()" accept="image/*" ref="file" required>
+              <input class="w-80 p-2 outline-none bg-green-200" type="file" name="image" @change="uploadFile()" accept="image/*" ref="file" required>
             </div>
         </div>
 
         <div class="flex flex-row justify-center gap-x-10">
             <div class="flex flex-col">
               <label class="text-a2blue mb-4" for="title">Category</label>
-              <select v-model="category" class="w-80 p-2 border" name="status" required>
-                <option>Supermarket</option>
-                <option>Health & Beauty</option>
-                <option>Home & Office</option>
-                <option>Phones & Tablets</option>
-                <option>Computing</option>
-                <option>Electronics</option>
-                <option>Fashion</option>
-                <option>Baby Products</option>
-                <option>Gaming</option>
-                <option>Sports Goods</option>
-                <option>Automobile</option>
+              <select v-model="category" class="w-80 p-2 border focus:outline-none" name="status"  required>
+                <option v-for="category in categories" :key="category.id" :value="category.id">{{category.name}}</option>
               </select>
             </div>
 
             <div class="flex flex-col">
               <label class="text-a2blue mb-4" for="title">Status</label>
-              <select v-model="pubStatus" class="w-80 p-2 border" name="status" id="" required>
+              <select v-model="pubStatus" class="w-80 p-2 border focus:outline-none" name="status" id="" required>
                 <option>published</option>
                 <option>draft</option>
               </select>
@@ -69,7 +62,6 @@
 <script>
 import { mapGetters, mapMutations } from "vuex"
 import storage from "~/mixins/storage"
-import slugify from "slugify"
 
 export default {
   layout: "merchant",
@@ -81,10 +73,19 @@ export default {
       image: null,
       price: null,
       description: null,
-      title: null
+      title: null,
+      categories: null
     }
   },
   mixins: [storage],
+  async mounted() {
+
+    let getDets = this.merchantUserDetails()
+    this.$axios.setToken(getDets().token, 'Bearer')
+    
+    const categories =  await this.$axios.$get('categories')
+    this.categories = categories
+  },
   methods: {
     ...mapGetters(['merchantUserDetails', 'merchantBusinessDetails']),
     ...mapMutations(['setMerchantProduct']),
@@ -96,9 +97,8 @@ export default {
         let data = {
           title: this.title,
           description: this.description,
-          price: this.price,
+          price: Number(this.price),
           category: this.category,
-          slug: slugify(this.title),
           status: this.pubStatus
         }
 
@@ -112,23 +112,28 @@ export default {
 
         if (fieldErrors.length > 0) return
 
-        // Upload Image
-        let imageData = new FormData()
-        imageData.append('files', this.image)
-        let image = await this.$axios.$post('/upload', imageData, {
+        // Upload Image and product
+        let productData = new FormData()
+        productData.append('files.image', this.image)
+        productData.append('data', JSON.stringify(data))
+
+
+        let newProduct = await this.$axios.$post('/products', productData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
       })
 
-      const merchantUserDetails = this.merchantUserDetails()
+
+      // const merchantUserDetails = this.merchantUserDetails()
 
         // upload product
-        data.image = image.id
-        data.merchant = merchantUserDetails().merchant
+        // data.image = image[0].id
+        // data.merchant = merchantUserDetails().merchant
 
         // Upload New Product
-        let newProduct = await this.$axios.$post('/products',  data)
+
+        console.log(newProduct);
 
         // Add new product to the merchant profile
         this.setMerchantProduct(newProduct)
