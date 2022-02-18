@@ -1,10 +1,24 @@
 <template>
   <section class="flex flex-col p-4">
+    <div v-if="$fetchState.pending" class="flex flex-row justify-center">
+        <svg class="animate-spin h-5 w-5 mr-3 border-b-2 border-r-2 rounded-full border-a2blue" viewBox="0 0 24 24">
+            <!-- ... -->
+        </svg>
+    </div>
+
+    <div v-else-if="$fetchState.error">
+            <!-- {{$fetchState}} -->
+        <div class="flex flex-row justify-center">
+          <img class="fw-40 h-40" src="~/assets/images/empty.svg" alt=""><br>
+        </div>
+        <p class="flex flex-row justify-center text-red-900 text-md font-thin">Something went wrong, please refresh the page</p>
+      </div>
+
     <div class="w-full flex justify-center overflow-hidden">
       <div class="inner w-screen" ref="inner" :style="innerStyles">
-        <div class="inline-flex mr-3 justify-center items-center w-screen h-carousel text-white" v-for="(card, index) in cards" :key="index">
+        <div class="inline-flex mr-3 justify-center items-center h-carousel" v-for="(card, index) in cards" :key="index">
           <!-- <p class="text-a2blue">{{ card }}</p> -->
-          <img class="h-full w-full" :src="imageUrl(card)" :alt="card">
+          <img class=" w-auto" :src="card" :alt="card">
         </div>
       </div>
     </div>
@@ -20,26 +34,34 @@
 export default {
   data () {
     return {
-      cards: [
-        "moving_slides.png",
-        "shop-online.jpg",
-        "become_a_merchant.png",
-        "shop-open.jpeg"],
+      cards: [],
       innerStyles: {},
       step: '',
       transitioning: false
     }
   },
-  mounted () {
+  async fetch() {
+    let cards = await this.$axios.$get('/slider');
+
+    cards.images.forEach(image => {
+    this.cards.push(this.productPicture(image.url))
+
+    });
+
     this.setStep()
     this.resetTranslate()
     this.autoScroll()
   },
+  // mounted () {
+  //   this.setStep()
+  //   this.resetTranslate()
+  //   this.autoScroll()
+  // },
   methods: {
     setStep () {
       const innerWidth = this.$refs.inner.scrollWidth
       const totalCards = this.cards.length
-      this.step = `${innerWidth / totalCards}px`
+      this.step = `${innerWidth}px`
     },
     next () {
       if (this.transitioning) return
@@ -95,33 +117,20 @@ export default {
       setInterval(() => {
         this.next()
       }, 5000);
+    },
+    productPicture(productImageUrl) {
+      return `${process.env.baseUrl}${productImageUrl}`
     }
   }
 }
 </script>
 
 <style scoped>
-.carousel {
-  width: 170px;
-  overflow: hidden;
-}
 .inner {
   transition: transform 0.2s;
   white-space: nowrap;
 }
-.card {
-  width: 40px;
-  margin-right: 10px;
-  display: inline-flex;
-  /* optional */
-  /* height: 40px; */
-  background-color: #39b1bd;
-  color: white;
-  border-radius: 4px;
-  align-items: center;
-  justify-content: center;
-}
 .h-carousel{
-  height: 500px;
+  height: 100px;
 }
 </style>
