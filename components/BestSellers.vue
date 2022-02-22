@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     productPicture(productImageUrl) {
-      if (productImageUrl.contains("https")) {
+      if (productImageUrl.includes("https")) {
         return productImageUrl
       }
       return `${process.env.baseUrl}${productImageUrl}`
