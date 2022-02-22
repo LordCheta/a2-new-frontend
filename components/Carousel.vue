@@ -119,6 +119,9 @@ export default {
       }, 5000);
     },
     productPicture(productImageUrl) {
+      if (productImageUrl.contains("https")) {
+        return productImageUrl
+      }
       return `${process.env.baseUrl}${productImageUrl}`
     }
   }
