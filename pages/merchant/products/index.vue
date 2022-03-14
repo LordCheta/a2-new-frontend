@@ -13,7 +13,7 @@
           <table class="w-full bg-white shadow">
             <thead>
               <tr class="text-md border bg-gray-200">
-                <th class="border-r border-a2blue font-extralight">Id</th>
+                <th class="border-r border-a2blue  font-extralight">Id</th>
                 <th class="border-r border-a2blue  font-extralight">Title</th>
                 <th class="border-r  border-a2blue font-extralight">Description</th>
                 <th class="border-r border-a2blue  font-extralight">Price</th>
@@ -24,39 +24,19 @@
               </tr>
             </thead>
 
-            <tbody>
-              <!-- <tr class="text-a2blue font-light">
-                <td class="p-4 border-b border-r">1</td>
-                <td class="p-4 border-b border-r">Beach Shirt</td>
-                <td class="p-4 border-b border-r">Very fine beach shirt</td>
-                <td class="p-4 border-b border-r">₦1300</td>
-                <td class="p-4 border-b border-r">Beach Wear</td>
-                <td class="p-4 border-b border-r">Published</td>
-                <td class="p-4 border-b border-r">Thursday, 9th December. 9pm</td>
-                <td class="p-4 border-b text-xs"> <span class="bg-green-900 text-white p-1 rounded-full">edit</span> <span class="bg-red-900 text-white p-1 rounded-full">delete</span></td>
-              </tr>
+            <tbody v-for="(product, index) in products" :key="index">
 
-              <tr class="text-a2blue font-light">
-                <td class="p-4 border-b border-r">2</td>
-                <td class="p-4 border-b border-r">Beach Shirt</td>
-                <td class="p-4 border-b border-r">Very fine beach shirt</td>
-                <td class="p-4 border-b border-r">₦1300</td>
-                <td class="p-4 border-b border-r">Beach Wear</td>
-                <td class="p-4 border-b border-r">Published</td>
-                <td class="p-4 border-b border-r">Thursday, 9th December. 9pm</td>
-                <td class="p-4 border-b"><span class="bg-green-900 text-white p-1 rounded-full">edit</span> <span class="bg-red-900 text-white p-1 rounded-full">delete</span></td>
-              </tr> -->
+                <merchantProductList
+                :index="index"
+                :id="product.id"
+                :title="product.title"
+                :description="product.description"
+                :price="product.price"
+                :status="product.status"
+                :created_at="product.created_at"
+                :slug="product.slug"
+                />
 
-              <tr class="text-a2blue font-light" v-for="product in products" :key="index">
-                <td class="p-4 border-b border-r">{{product.id}}</td>
-                <td class="p-4 border-b border-r">{{product.title}}</td>
-                <td class="p-4 border-b border-r">{{product.description}}</td>
-                <td class="p-4 border-b border-r">₦{{product.price}}</td>
-                <!-- <td class="p-4 border-b border-r">{{product.category.name}}</td> -->
-                <td class="p-4 border-b border-r">{{product.status}}</td>
-                <td class="p-4 border-b border-r">{{product.created_at}}</td>
-                <td class="p-4 border-b"><span class="bg-green-900 text-white p-1 rounded-full">edit</span> <span class="bg-red-900 text-white p-1 rounded-full">delete</span></td>
-              </tr>
             </tbody>
         </table>
       </div>
@@ -65,25 +45,25 @@
 
 <script>
 import { mapGetters } from "vuex"
+import Merchant from "../index.vue"
 
 export default {
-  layout: "merchant",
-  middleware: 'merchantAuth',
-  data() {
-    return {
-      products: null
-    }
-  },
-  methods: {
-    ...mapGetters(['merchantProducts', 'merchantUserDetails']),
-  },
-   mounted() {
-    let getDets = this.merchantUserDetails()
-    this.$axios.setToken(getDets().token, 'Bearer')
-
-    const products = this.merchantProducts()
-
-    this.products = products()
-  }
+    layout: "merchant",
+    middleware: "merchantAuth",
+    data() {
+        return {
+            products: null
+        };
+    },
+    methods: {
+        ...mapGetters(["merchantProducts", "merchantUserDetails"]),
+    },
+    mounted() {
+        let getDets = this.merchantUserDetails();
+        this.$axios.setToken(getDets().token, "Bearer");
+        const products = this.merchantProducts();
+        this.products = products();
+    },
+    components: { Merchant }
 }
 </script>

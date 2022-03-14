@@ -65,6 +65,27 @@ export const mutations = {
 
     state.merchant.products.push(data)
 
+  },
+  updateMerchantProduct(state, data) {
+    let products = getters.merchantProducts();
+    products = products();
+    // console.log("store", products);
+    products.find((o, i) => {
+      if(o.id == data.id) {
+        state.merchant.products.splice(i, 1, data);
+        return;
+      }
+    })
+  },
+
+  removeMerchantProduct(state, data) {
+    let products = getters.merchantProducts();
+    products.find((o, i) => {
+      if(o.id == data.id) {
+        state.merchant.product.splice(i, 1);
+        return;
+      }
+    })
   }
 }
 
