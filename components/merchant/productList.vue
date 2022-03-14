@@ -36,7 +36,7 @@ export default {
 
         this.$toast.success("Product Deleted Successfully").goAway(4000)
 
-        this.$nuxt.refresh()
+        window.location.reload(true)
       } catch (e) {
         console.log(e.response);
         this.$toast.error(e).goAway(3000)

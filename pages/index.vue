@@ -1,9 +1,9 @@
 <template>
   <div class="bg-gray-100 h-auto">
-    <HeaderBanner/>
-    <Header/>
+    <HeaderBanner />
+    <Header class="sticky top-0 z-50"/>
     <main class="flex flex-row w-screen">
-      <CategoriesSideMenu class="w-2/12" />
+      <CategoriesSideMenu class="w-2/12 sticky top-1" />
 
       <section class="flex flex-col w-10/12">
         <Carousel/>

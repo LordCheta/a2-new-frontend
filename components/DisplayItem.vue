@@ -1,10 +1,11 @@
 <template>
-  <div class="w-60 h-80 rounded-lg overflow-hidden shadow-md bg-white">
-    <img class="w-full h-3/5 border-b" :src="iPicture" alt="picture of the product"/>
+  <div class="w-64 h-84 rounded-lg overflow-hidden shadow-md bg-white">
+    <img class="w-full h-3/5 border-b border-a2yellow" :src="iPicture" alt="picture of the product"/>
 
-    <div class="flex flex-row mt-2">
+    <section class="bg-a2yellow h-full">
+      <div class="flex flex-row justify-between mt-2">
       <NuxtLink :to="`/products/${iId}`"
-        class="text-a2blue font-extralight text-2xl ml-4"
+        class="font-extralight text-2xl ml-4 text-gray-900  truncate"
         :productDetail="{
           picture: iPicture,
           name: iName,
@@ -15,18 +16,32 @@
         }" :image="iPicture" :iName="iName">
           {{iName}}
       </NuxtLink>
-      <div class="flex flex-row gap-1 ml-16 mt-1">
+      <div class="flex flex-row gap-1 p-2 ml-16 mt-1">
         <solid-star-icon class="w-6  h-6 text-a2yellow"/>
         <p class="text-a2blue text-sm">{{iRating}}</p>
       </div>
     </div>
     <p class="text-a2blue font-meduim text-2xl ml-4">₦{{iPrice}}</p>
 
-    <button type="submit" class="p-1 border-2 text-xs ml-4 mt-3 text-a2blue rounded-lg font-light">Add &nbsp; +</button>
+    <button @click="addToCustomerCart({
+              userRequestedQty,
+              image,
+              rating,
+              productName,
+              productDescription,
+              productPrice,
+              color,
+              weight,
+              volume,
+              recyclable
+              })" type="submit" class="p-1 w-20 border-2 text-xs ml-4 mt-3 bg-a2blue text-white rounded-2xl font-light">Add &nbsp; +</button>
+    </section>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex"
+
   export default {
   props: {
     iPicture: {
@@ -41,8 +56,20 @@
   },
   data () {
       return {
-
+        image: this.iPicture,
+        rating: this.iRating,
+        productName: this.iName,
+        productDescription: this.iDescription,
+        productPrice: this.iPrice,
+        color: "N/A",
+        weight: "N/A",
+        volume: "N/A",
+        recyclable: "N/A",
+        userRequestedQty: 1,
       }
+    },
+  methods: {
+    ...mapMutations(['addToCustomerCart']),
     }
   }
 </script>
