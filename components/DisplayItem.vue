@@ -17,7 +17,7 @@
           {{iName}}
       </NuxtLink>
       <div class="flex flex-row gap-1 p-2 ml-16 mt-1">
-        <solid-star-icon class="w-6  h-6 text-a2yellow"/>
+        <solid-star-icon class="w-6  h-6 text-a2blue"/>
         <p class="text-a2blue text-sm">{{iRating}}</p>
       </div>
     </div>
