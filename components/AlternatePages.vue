@@ -17,15 +17,34 @@
       <h1 class="text-a2blue text-5xl font-extralight tracking-wider">{{title}}</h1>
     </div>
 
-    <div>
-      <div class="flex justify-center">
-        <img src="~/assets/images/empty.svg" class="w-96 h-96" alt="">
+    <section class="flex flex-col">
+      <div v-if="$fetchState.pending" class="flex flex-row justify-center">
+        <svg class="animate-spin h-5 w-5 mr-3 border-b-2 border-r-2 rounded-full border-a2blue" viewBox="0 0 24 24">
+            <!-- ... -->
+        </svg>
       </div>
-      <p class="flex justify-center text-md font-light text-gray-600">Nothing to show here just yet</p>
-      <div class="flex justify-center content-center mt-5">
-        <nuxt-link to="/" class="flex justify-center bg-a2blue p-1 text-a2yellow rounded-full w-40">Go Home</nuxt-link>
+
+      <div v-else-if="$fetchState.error || products == null">
+        <div class="flex justify-center">
+          <img src="~/assets/images/empty.svg" class="w-96 h-96" alt="">
+        </div>
+        <p class="flex justify-center text-md font-light text-gray-600">Nothing to show here just yet</p>
+        <div class="flex justify-center content-center mt-5">
+          <nuxt-link to="/" class="flex justify-center bg-a2blue p-1 text-a2yellow rounded-full w-40">Go Home</nuxt-link>
+        </div>
       </div>
-    </div>
+
+
+       <div v-else class="flex flex-wrap justify-start content-center mt-8 gap-5">
+        <DisplayItem v-for="product in products.slice(0, 20)" :key="index"
+          :iName="product.title"
+          :iPicture="productPicture(product.image.url)"
+          :iPrice="product.price"
+          :iId="product.slug"
+          iRating="4/5"/>
+        </div>
+    </section>
+
   </div>
 </template>
 
@@ -56,18 +75,19 @@ export default {
       best_sellers: false,
       new_additions: false,
       others: false,
+      products: null
     }
   },
   methods: {
     renderIcon(iconName) {
       switch(iconName) {
-        case "health_beauty":
+        case "health-and-beauty":
           this.health_beauty = true
           break;
-        case "home_office":
+        case "home-and-office":
           this.home_office = true
           break;
-        case "phones_tablets":
+        case "phones-and-tablets":
           this.phones_tablets = true
           break;
         case "computing":
@@ -79,13 +99,13 @@ export default {
         case "fashion":
           this.fashion = true
           break;
-        case "baby_products":
+        case "baby-products":
           this.baby_products = true
           break;
         case "gaming":
           this.gaming = true
           break;
-        case "sports_goods":
+        case "sporting-goods":
           this.sports_goods = true
           break;
         case "automobile":
@@ -100,10 +120,30 @@ export default {
         default:
           this.others = true
       }
+    },
+    productPicture(productImageUrl) {
+      if (productImageUrl.includes("https")) {
+        return productImageUrl
+      }
+      return `${process.env.baseUrl}${productImageUrl}`
     }
   },
-  mounted() {
-    this.renderIcon(this.icon)
+  async fetch() {
+    this.renderIcon(this.icon);
+
+    let products;
+
+    if(this.icon == "new_additions" || this.icon == "best_sellers") {
+      products = await this.$axios.$get(`/products`);
+    } else {
+      products = await this.$axios.$get(`/products?category.slug=${this.icon}`);
+    }
+
+    if (products.length < 1 ) {
+      return this.products = null
+    } else {
+      this.products = products
+    }
   },
 }
 </script>

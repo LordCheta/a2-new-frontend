@@ -1,6 +1,6 @@
 <template>
-  <div class="h-screen bg-gray-200">
-    <AlternatePages title="Sports Goods" icon="sports_goods"/>
+  <div class="bg-gray-200">
+    <AlternatePages title="Sports Goods" icon="sporting-goods"/>
   </div>
 </template>
 

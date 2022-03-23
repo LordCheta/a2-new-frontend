@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen bg-gray-200">
+  <div class="bg-gray-200">
     <AlternatePages title="New Additions" icon="new_additions"/>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
-  <div class="h-screen bg-gray-200">
-    <AlternatePages title="Phones & Tablets" icon="phones_tablets"/>
+  <div class="bg-gray-200">
+    <AlternatePages title="Phones & Tablets" icon="phones-and-tablets"/>
   </div>
 </template>
 

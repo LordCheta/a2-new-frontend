@@ -1,6 +1,6 @@
 <template>
-  <div class="h-screen bg-gray-200">
-    <AlternatePages title="Health & Beauty" icon="health_beauty"/>
+  <div class="bg-gray-200">
+    <AlternatePages title="Health & Beauty" icon="health-and-beauty"/>
   </div>
 </template>
 

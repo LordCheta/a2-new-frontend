@@ -1,5 +1,5 @@
 <template>
-  <div class="w-64 h-84 rounded-lg overflow-hidden shadow-md bg-white">
+  <div class="w-64 h-96 rounded-lg overflow-hidden shadow-md bg-white">
     <img class="w-full h-3/5 border-b border-a2yellow" :src="iPicture" alt="picture of the product"/>
 
     <section class="bg-a2yellow h-full">

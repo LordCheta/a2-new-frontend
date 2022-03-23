@@ -1,6 +1,6 @@
 <template>
-  <div class="h-screen bg-gray-200">
-    <AlternatePages title="Baby Products" icon="baby_products"/>
+  <div class="bg-gray-200">
+    <AlternatePages title="Baby Products" icon="baby-products"/>
   </div>
 </template>
 
