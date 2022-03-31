@@ -1,6 +1,6 @@
 <template>
   <footer class="flex flex-col w-screen h-auto">
-    <section class="flex justify-evenly flex-wrap content-center bg-a2blue h-36">
+    <section class="flex flex-col p-2 justify-center items-center lg:justify-evenly lg:flex-wrap lg:content-center bg-a2blue lg:h-36">
       <div>
         <img src="~/assets/images/a2logonew-white.png" class="w-32 h-18" alt="a2-logo">
         <p class="mt-2 text-sm font-poppins text-a2yellow">Great mall, Big rewards</p >

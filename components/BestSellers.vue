@@ -1,6 +1,6 @@
 <template>
   <section class="p-4 flex flex-col mt-8">
-    <div class="flex flex-row justify-between gap-11">
+    <div class="flex flex-col lg:flex-row lg:justify-between lg:gap-11">
       <div class="flex flex-row">
         <solid-tag-icon class="w-14 h-14 text-a2blue"/>
         <h1 class="text-a2blue text-5xl font-extralight tracking-wider">Top Selling Items</h1>

@@ -1,11 +1,11 @@
 <template>
-  <div class="w-64 h-96 rounded-lg overflow-hidden shadow-md bg-white">
+  <div class="w-36 lg:w-64 h-58 lg:h-96 rounded-lg overflow-hidden shadow-md bg-white">
     <img class="w-full h-3/5 border-b border-a2yellow" :src="iPicture" alt="picture of the product"/>
 
-    <section class="bg-a2yellow h-full">
+    <section class="bg-a2yellow h-full mb-2">
       <div class="flex flex-row justify-between mt-2">
       <NuxtLink :to="`/products/${iId}`"
-        class="font-extralight text-2xl ml-4 text-gray-900  truncate"
+        class=" font-light lg:font-extralight test-xs lg:text-2xl ml-3 text-gray-900  truncate"
         :productDetail="{
           picture: iPicture,
           name: iName,
@@ -13,15 +13,15 @@
           id: iId,
           price: iPrice,
           description: iDescription
-        }" :image="iPicture" :iName="iName">
+        }" :image="iPicture" :iName="iName" :title="iName">
           {{iName}}
       </NuxtLink>
-      <div class="flex flex-row gap-1 p-2 ml-16 mt-1">
-        <solid-star-icon class="w-6  h-6 text-a2blue"/>
-        <p class="text-a2blue text-sm">{{iRating}}</p>
+      <div class="flex flex-row gap-1 p-2 lg:ml-16 lg:mt-1">
+        <solid-star-icon class="w-4 lg:w-6 lg:h-6 h-4 text-a2blue"/>
+        <p class="text-a2blue text-xs lg:text-sm">{{iRating}}</p>
       </div>
     </div>
-    <p class="text-a2blue font-meduim text-2xl ml-4">₦{{iPrice}}</p>
+    <p class="text-a2blue font-meduim text-xs lg:text-2xl ml-4">₦{{iPrice}}</p>
 
     <button @click="addToCustomerCart({
               userRequestedQty,
@@ -34,7 +34,7 @@
               weight,
               volume,
               recyclable
-              })" type="submit" class="p-1 w-20 border-2 text-xs ml-4 mt-3 bg-a2blue text-white rounded-2xl font-light">Add &nbsp; +</button>
+              })" type="submit" class="p-1 w-14 lg:w-20 border-2 text-xs lg:text-xs ml-3 lg:ml-4 mt-3 bg-a2blue text-white rounded-2xl font-light">Add &nbsp; +</button>
     </section>
   </div>
 </template>
