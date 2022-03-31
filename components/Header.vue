@@ -11,7 +11,7 @@
       </button>
     </section>
 
-    <section :class="{hidden: !hidden}" class="w-screen flex flex-col lg:flex-row justify-between bg-a2blue p-4 lg:h-24">
+    <section :class="{hidden: !hidden}" class="w-screen flex flex-col lg:flex-row justify-between bg-a2blue p-4 lg:h-24 lg:flex">
       <div class="flex justify-between">
         <NuxtLink to="/" class="font-mont text-white text-sm ">
           <img src="~/assets/images/a2logonew-white.png" class="w-44 h-18"/>
@@ -22,7 +22,7 @@
         </button>
       </div>
 
-      <div class="flex flex-col justify-center items-center">
+      <div class="flex flex-col justify-center items-center lg:flex-row">
         <HeaderSearch class="m-4"/>
 
         <Account class="m-4"/>
@@ -31,6 +31,8 @@
 
         <Cart class="m-4"/>
       </div>
+
+      
 
     </section>
   </header >
