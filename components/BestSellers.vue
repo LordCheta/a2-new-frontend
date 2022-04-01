@@ -19,7 +19,7 @@
       <div class=" mt-8" v-else-if="$fetchState.error">
             <!-- {{$fetchState}} -->
           <div class="flex flex-row justify-center">
-            <img class="fw-40 h-40" src="~/assets/images/empty.svg" alt=""><br>
+            <img class="w-40 h-40" src="~/assets/images/empty.svg" alt=""><br>
           </div>
           <p class="flex flex-row justify-center text-red-900 text-md font-thin">Something went wrong, please refresh the page</p>
       </div>

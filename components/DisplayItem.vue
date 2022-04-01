@@ -1,9 +1,9 @@
 <template>
-  <div class="w-36 lg:w-64 h-58 lg:h-96 rounded-lg overflow-hidden shadow-md bg-white">
+  <div class="w-32 lg:w-64 h-52 lg:h-96 rounded-lg overflow-hidden shadow-md bg-white">
     <img class="w-full h-3/5 border-b border-a2yellow" :src="iPicture" alt="picture of the product"/>
 
-    <section class="bg-a2yellow h-full mb-2">
-      <div class="flex flex-row justify-between mt-2">
+    <section class="bg-a2yellow h-full">
+      <div class="flex flex-row justify-between">
       <NuxtLink :to="`/products/${iId}`"
         class=" font-light lg:font-extralight test-xs lg:text-2xl ml-3 text-gray-900  truncate"
         :productDetail="{
@@ -34,7 +34,7 @@
               weight,
               volume,
               recyclable
-              })" type="submit" class="p-1 w-14 lg:w-20 border-2 text-xs lg:text-xs ml-3 lg:ml-4 mt-3 bg-a2blue text-white rounded-2xl font-light">Add &nbsp; +</button>
+              })" type="submit" class="p-1 w-14 lg:w-20 border-2 text-xs lg:text-xs ml-3 lg:ml-4 mt-1 lg:mt-3 bg-a2blue text-white rounded-2xl font-light">Add &nbsp; +</button>
     </section>
   </div>
 </template>
