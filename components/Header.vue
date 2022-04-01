@@ -1,9 +1,9 @@
 <template>
   <header>
 
-    <section :class="{hidden: hidden}"  class="lg:hidden w-screen flex flex-row justify-between bg-a2blue p-4 lg:h-24">
+    <section :class="{hidden: hidden}"  class="lg:hidden w-screen flex flex-row justify-between bg-a2blue p-1 lg:h-24">
        <NuxtLink to="/" class="font-mont text-white text-sm ">
-        <img src="~/assets/images/a2logonew-white.png" class="w-44 h-18"/>
+        <img src="~/assets/images/a2logonew-white.png" class="w-36 h-18"/>
       </NuxtLink>
 
       <button @click="toggleMobileMenu()" class="flex items-center px-3 py-2 rounded text-a2yellow border-teal-400 hover:text-white hover:border-white">
