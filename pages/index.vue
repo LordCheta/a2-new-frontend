@@ -2,11 +2,12 @@
   <div class="bg-gray-100 h-auto">
     <HeaderBanner />
     <Header class="sticky top-0 z-50"/>
+    <Carousel/>
     <main class="flex flex-row w-screen min-h-screen">
       <CategoriesSideMenu class="w-2/12 sticky top-1" />
 
       <section class="flex flex-col w-10/12">
-        <Carousel/>
+
 
         <BestSellers/>
 

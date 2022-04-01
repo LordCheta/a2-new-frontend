@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col p-4">
+  <section class="flex flex-col">
     <div v-if="$fetchState.pending" class="flex flex-row justify-center">
         <svg class="animate-spin h-5 w-5 mr-3 border-b-2 border-r-2 rounded-full border-a2blue" viewBox="0 0 24 24">
             <!-- ... -->
@@ -18,7 +18,7 @@
       <div class="inner w-screen" ref="inner" :style="innerStyles">
         <div class="inline-flex mr-3 justify-center items-center h-carousel" v-for="(card, index) in cards" :key="index">
           <!-- <p class="text-a2blue">{{ card }}</p> -->
-          <img class=" w-auto" :src="card" :alt="card">
+          <img class=" w-full" :src="card" :alt="card">
         </div>
       </div>
     </div>
