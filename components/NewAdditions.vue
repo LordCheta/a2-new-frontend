@@ -1,12 +1,12 @@
 <template>
   <section class="p-4 flex flex-col mt-8">
-    <div class="flex flex-col lg:flex-row lg:justify-between lg:gap-11">
+    <div class="flex flex-row justify-between lg:gap-11">
       <div class="flex flex-row">
-        <solid-cube-icon class="w-14 h-14 text-a2blue"/>
-        <h1 class="text-a2blue text-5xl font-extralight tracking-wider">New Additions</h1>
+        <solid-cube-icon class="lg:w-14 w-8 lg:h-14 h-8 text-a2blue"/>
+        <h1 class="text-a2blue text-xl lg:text-5xl font-light lg:font-extralight tracking-wider">New Additions</h1>
       </div>
 
-      <nuxt-link to="/new-additions" class="text-gray-700 font-light text-xl p-4 mr-44">View all &#8594;</nuxt-link>
+      <nuxt-link to="/new-additions" class="text-gray-700 font-light text-xs lg:text-xl p-2 lg:p-4">View all &#8594;</nuxt-link>
     </div>
 
     <div class="flex flex-col">

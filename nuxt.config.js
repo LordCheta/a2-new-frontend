@@ -4,14 +4,14 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'a2-new-frontend',
+    title: 'a2mall',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'A2 Mall', name: 'online shopping', content: 'A2 Mall is the best online shopping mann for all your needs at great proces and exciting rewards!' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
