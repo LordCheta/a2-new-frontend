@@ -18,14 +18,17 @@
       <div class="inner w-screen" ref="inner" :style="innerStyles">
         <div class="inline-flex justify-center items-center h-carousel" v-for="(card, index) in cards" :key="index">
           <!-- <p class="text-a2blue">{{ card }}</p> -->
-          <img class=" w-full" :src="card" :alt="card">
+          <img class="w-full" :id="card" :src="card" :alt="card">
         </div>
       </div>
     </div>
 
-    <div class="divide-x divide-a2blue text-a2yellow mt-1">
-      <button @click="prev" class="p-1">prev</button>
-      <button @click="next" class="p-1">next</button>
+    <div class="flex justify-center text-a2blue mt-1">
+      <!-- <button @click="prev" class="p-1"><solid-arrow-narrow-left-icon class="w-4 h-4"/></button> -->
+      <div class="flex flex-row" v-for="(card, index) in cards" :key="index">
+          <a :href="`#${card}`" class="rounded-2xl w-1 h-1 bg-a2yellow border-2 border-a2blue mr-1"></a>
+      </div>
+      <!-- <button @click="next" class="p-1"><solid-arrow-narrow-right-icon class="w-4 h-4"/></button> -->
     </div>
   </section>
 </template>
