@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col p-1">
+  <section class="flex flex-col p-1 lg:p4">
     <div v-if="$fetchState.pending" class="flex flex-row justify-center">
         <svg class="animate-spin h-5 w-5 mr-3 border-b-2 border-r-2 rounded-full border-a2blue" viewBox="0 0 24 24">
             <!-- ... -->
