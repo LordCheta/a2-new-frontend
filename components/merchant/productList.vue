@@ -3,7 +3,7 @@
     <td class="p-4 border-b border-r">{{index + 1}}</td>
     <td class="p-4 border-b border-r">{{title}}</td>
     <td class="p-4 border-b border-r">{{description}}</td>
-    <td class="p-4 border-b border-r">₦{{price}}</td>
+    <td class="p-4 border-b border-r">₦{{amountWithComma(price)}}</td>
     <!-- <td class="p-4 border-b border-r">{{product.category.name}}</td> -->
     <td class="p-4 border-b border-r">{{status}}</td>
     <td class="p-4 border-b border-r">{{created_at}}</td>
@@ -12,9 +12,12 @@
 </template>
 
 <script>
-import reloadMerchantProfile from "~/mixins/storage"
+import reloadMerchantProfile from "~/mixins/storage";
+import amountWithComma from "~/mixins/amountWithCommas";
+
 
 export default {
+  mixins: [amountWithComma],
   props: {
     index: { required: true },
     id: { required: true},

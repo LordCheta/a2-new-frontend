@@ -20,9 +20,9 @@
         <tbody>
           <tr v-for="product in customerCart()" :key="index" class="p-2 text-xl text-a2blue font-normal border-gray-300">
             <td class="p-4 border-b border-r">{{product.productName}}</td>
-            <td class="p-4 border-b border-r">₦{{product.productPrice}}</td>
+            <td class="p-4 border-b border-r">₦{{amountWithComma(product.productPrice)}}</td>
             <td class="p-4 border-b border-r">{{product.userRequestedQty}}</td>
-            <td class="p-4 border-b border-r">₦{{(product.userRequestedQty * product.productPrice).toFixed(2)}}</td>
+            <td class="p-4 border-b border-r">₦{{amountWithComma((product.userRequestedQty * product.productPrice).toFixed(2))}}</td>
           </tr>
         </tbody>
       </table>
@@ -30,7 +30,7 @@
       <div class="p-6">
         <p class="font-medium underline text-a2blue">CART TOTALS</p>
 
-        <p class="text-sm text-gray-400">Subtotal: ₦{{calcCartSubtotal}}</p>
+        <p class="text-sm text-gray-400">Subtotal: ₦{{amountWithComma(calcCartSubtotal.toFixed(2))}}</p>
         <hr>
         <div class="flex flex-col">
           <p class="text-sm text-gray-400 underline mt-2">Delivery</p>
@@ -48,7 +48,7 @@
 
         </div>
         <hr>
-        <p class="text-md mt-3 text-gray-600 font-bold">Total: ₦{{total}}</p>
+        <p class="text-md mt-3 text-gray-600 font-bold">Total: ₦{{amountWithComma(total.toFixed(2))}}</p>
         <button class="mt-4 bg-a2blue text-xs text-a2yellow p-2 " type="submit">PROCEED TO PAYMENT</button>
       </div>
 
@@ -59,8 +59,12 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex"
+import {mapGetters, mapMutations} from "vuex";
+import amountWithComma from "~/mixins/amountWithCommas";
+import { getCustomerCartData } from "~/helpers/storage"
+
   export default {
+    mixins: [amountWithComma],
     data() {
       return {
         cartSubtotal: 0,
@@ -84,6 +88,7 @@ import {mapGetters} from "vuex"
       }
     },
     methods: {
+      ...mapMutations(['addToCustomerCart']),
       calcCartTotal() {
         return this.total = +this.cartSubtotal + +this.deliveryFee
       },
@@ -91,5 +96,16 @@ import {mapGetters} from "vuex"
 
       }
     },
+    // mounted() {
+    //   if(this.customerCart.length === 0) {
+    //     let cartData = getCustomerCartData();
+
+    //     if(cartData) {
+    //       cartData.forEach(cartItem => {
+    //         this.addToCustomerCart(cartItem)
+    //       });
+    //     }
+    //   }
+    // },
   }
 </script>

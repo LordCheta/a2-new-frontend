@@ -21,7 +21,7 @@
         <p class="text-a2blue text-xs lg:text-sm">{{iRating}}</p>
       </div>
     </div>
-    <p class="text-a2blue font-meduim text-xs lg:text-2xl ml-4">₦{{iPrice}}</p>
+    <p class="text-a2blue font-meduim text-xs lg:text-2xl ml-4">₦{{amountWithComma(iPrice)}}</p>
 
     <button @click="addToCustomerCart({
               userRequestedQty,
@@ -40,9 +40,12 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex"
+import { mapMutations } from "vuex";
+import amountWithComma from "~/mixins/amountWithCommas";
+import { setCustomerCartData, getCustomerCartData } from "~/helpers/storage";
 
   export default {
+  mixins: [amountWithComma],
   props: {
     iPicture: {
       type: String,
@@ -70,6 +73,19 @@ import { mapMutations } from "vuex"
     },
   methods: {
     ...mapMutations(['addToCustomerCart']),
+    addToCustomerSessionCart(data) {
+
+      // add to session storage
+        setCustomerCartData(data);
+
+      // get from local storage and add to store
+      let cartData = getCustomerCartData();
+      console.log(cartData);
+
+      cartData.forEach(cartItem => {
+          this.addToCustomerCart(cartItem);
+        });
+      }
     }
   }
 </script>

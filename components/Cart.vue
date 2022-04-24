@@ -14,10 +14,31 @@
 </style>
 
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters, mapMutations } from "vuex";
+import { setCustomerCartData, getCustomerCartData } from "~/helpers/storage";
+
 export default {
   computed: {
     ...mapGetters(['cartSize']),
-  }
+    customerCartSize() {
+      let size = 0;
+
+      if(this.cartSize() === 0) {
+        let cartData = getCustomerCartData();
+
+        if(cartData) {
+          cartData.forEach(cartItem => {
+          this.addToCustomerCart(cartItem);
+          });
+          size = cartData.length
+        }
+      }
+
+      return size;
+    }
+  },
+  methods: {
+    ...mapMutations(['addToCustomerCart']),
+  },
 }
 </script>

@@ -24,6 +24,6 @@ import BestSellers from '~/components/BestSellers.vue'
 import NewAdditions from '~/components/NewAdditions.vue'
 
 export default Vue.extend({
-  components: { BestSellers, NewAdditions }
+  components: { BestSellers, NewAdditions },
   })
 </script>

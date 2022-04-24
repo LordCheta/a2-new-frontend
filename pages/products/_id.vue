@@ -20,7 +20,7 @@
       <section class="mt-10 ml-5">
         <p class="text-a2blue text-4xl font-medium">{{productName}}</p>
         <p class="text-a2blue text-xs font-medium w-2/3 h-auto">{{productDescription}}</p>
-        <p class="p-2 text-a2blue font-medium text-3xl">₦{{productPrice}}</p>
+        <p class="p-2 text-a2blue font-medium text-3xl">₦{{amountWithComma(productPrice)}}</p>
         <div class="p-2 flex flex-col gap-2 text-xl text-a2blue font-light">
           <p>Rating: <span class="text-gray-400 text-sm">{{rating}}</span></p>
           <p>Color: <span class="text-gray-400 text-sm">{{color}}</span></p>
@@ -60,8 +60,13 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex"
+import { mapMutations } from "vuex";
+import amountWithComma from "~/mixins/amountWithCommas";
+import { setCustomerCartData, getCustomerCartData } from "~/helpers/storage";
+
+
   export default {
+    mixins: [amountWithComma],
     data() {
       return {
         image: "N/A",
@@ -86,7 +91,18 @@ import { mapMutations } from "vuex"
     },
     methods: {
       ...mapMutations(['addToCustomerCart']),
-    },
+      addToCustomerSessionCart(data) {
 
+      // add to session storage
+        setCustomerCartData(data);
+
+      // get from local storage and add to store
+      let cartData = getCustomerCartData();
+
+      cartData.forEach(cartItem => {
+          this.addToCustomerCart(cartItem);
+        });
+      }
+    }
   }
 </script>

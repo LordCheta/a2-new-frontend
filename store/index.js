@@ -1,3 +1,5 @@
+import { setCustomerCartData, getCustomerCartData } from "~/helpers/storage";
+
 export const state = () => ({
   customer: {
     cart:[]
@@ -12,13 +14,31 @@ export const state = () => ({
 
 export const getters = {
   customerCart: (state) => () => {
+    if(state.customer.cart.length === 0) {
+      // get from local storage and add to store
+      let cartData = getCustomerCartData();
+
+      if(cartData) {
+        return cartData
+      }
+    }
     return state.customer.cart
   },
   cartSize: (state) => () => {
-    if(state.customer.cart.length == 0) return 0
+    if(state.customer.cart.length == 0) {
+      // get from local storage and add to store
+      let cartData = getCustomerCartData();
+
+      if(cartData) {
+        return cartData.length
+      }
+
+      return 0;
+    }
 
     let size = 0;
-    state.customer.cart.map(product => {
+    let cartData = getCustomerCartData();
+    cartData.map(product => {
         size += Number(product.userRequestedQty)
     })
 
@@ -37,7 +57,17 @@ export const getters = {
 
 export const mutations = {
   addToCustomerCart(state, product) {
-    state.customer.cart.push(product)
+    // add to session storage
+        setCustomerCartData(product);
+    // get from local storage and add to store
+    let cartData = getCustomerCartData();
+
+    state.customer.cart = [];
+
+    cartData.forEach(cartItem => {
+      state.customer.cart.push(cartItem);
+    });
+
   },
   setMerchantUser(state, data) {
     state.merchant.user = data
