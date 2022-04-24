@@ -18,6 +18,7 @@
     "nuxt": "^2.15.7",
     "slugify": "^1.6.5",
     "vee-validate": "^3.4.14",
+    "vue-flutterwave": "^1.0.0",
     "vue-slick-carousel": "^1.0.6"
   },
   "devDependencies": {
